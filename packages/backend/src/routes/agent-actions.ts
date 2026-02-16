@@ -175,7 +175,7 @@ export async function agentActionRoutes(app: FastifyInstance) {
                     });
 
                     const healthData = await Promise.all(
-                        agents.map(async (agent) => {
+                        agents.map(async (agent: any) => {
                             const vitality = await getVitality(agent.walletAddress);
                             return {
                                 agentId: agent.id,
@@ -188,8 +188,8 @@ export async function agentActionRoutes(app: FastifyInstance) {
                     );
 
                     const avgVitality =
-                        healthData.reduce((sum, a) => sum + a.vitality, 0) / healthData.length || 0;
-                    const atRisk = healthData.filter((a) => a.atRisk);
+                        healthData.reduce((sum: number, a: any) => sum + a.vitality, 0) / healthData.length || 0;
+                    const atRisk = healthData.filter((a: any) => a.atRisk);
 
                     result = {
                         averageVitality: Math.round(avgVitality),
@@ -432,7 +432,7 @@ export async function agentActionRoutes(app: FastifyInstance) {
         });
 
         // Convert BigInt fields to Number for JSON serialization
-        const serializedAgents = agents.map((agent) => ({
+        const serializedAgents = agents.map((agent: any) => ({
             ...agent,
             lastPulseBlock: Number(agent.lastPulseBlock),
         }));
@@ -446,7 +446,7 @@ export async function agentActionRoutes(app: FastifyInstance) {
             agents: serializedAgents,
             metabolicParams,
             totalAgents: serializedAgents.length,
-            activeAgents: serializedAgents.filter((a) => a.isActive).length,
+            activeAgents: serializedAgents.filter((a: any) => a.isActive).length,
         });
     });
 
@@ -466,7 +466,7 @@ export async function agentActionRoutes(app: FastifyInstance) {
             },
         });
 
-        const transactions = recentTxLogs.map((log) => {
+        const transactions = recentTxLogs.map((log: any) => {
             // Extract tx hash from actionTaken string
             const txMatch = log.actionTaken.match(/tx:\s*(0x[a-fA-F0-9]+)/);
             const txHash = txMatch ? txMatch[1] : null;

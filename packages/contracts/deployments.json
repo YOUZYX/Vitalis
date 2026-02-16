@@ -1,0 +1,15 @@
+{
+  "network": "monad-testnet",
+  "chainId": 10143,
+  "deployer": "0x31079B3C96Bb41d2e4c0A4948b3F448cfb288082",
+  "contracts": {
+    "VitalityRegistry": "0x9A791704D3F9cdE890e5C230a1E49C37C045b60B",
+    "VitalisBounty": "0xA4895A800339d24a7d7a807ab4d97B9752e32C88"
+  },
+  "transactions": {
+    "registryDeploy": "0xbe9c75ca33daf4f4ee779d65149723d86394c6dc5ada2ef8f0420c2aed6db9ca",
+    "bountyDeploy": "0xe2273ca0178e1ce2a672f61f04df0a9fa1f20e300bf016eb3d299fb40f062672",
+    "setBountyContract": "0x944a63394c6fe421e1e071ce1754fa62d6be875e271038288a9872a33e786ad5"
+  },
+  "deployedAt": "2026-02-15T03:41:59.322Z"
+}

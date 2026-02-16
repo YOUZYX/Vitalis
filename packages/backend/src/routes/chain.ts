@@ -84,8 +84,8 @@ export async function chainRoutes(app: FastifyInstance) {
             });
 
             const addresses = dbAgents
-                .map((a) => a.walletAddress)
-                .filter((addr): addr is string => !!addr && addr.length > 0);
+                .map((a: { walletAddress: string | null }) => a.walletAddress)
+                .filter((addr: string | null): addr is string => !!addr && addr.length > 0);
 
             const onChainData = await getAllAgents(addresses);
 
@@ -93,9 +93,9 @@ export async function chainRoutes(app: FastifyInstance) {
             const SYSTEM_ROLES = ["GUARDIAN", "ARCHITECT", "VALIDATOR", "STRATEGIST"];
 
             const leaderboard = onChainData
-                .map((chain) => {
+                .map((chain: any) => {
                     const dbAgent = dbAgents.find(
-                        (a) => a.walletAddress?.toLowerCase() === chain.address.toLowerCase()
+                        (a: any) => a.walletAddress?.toLowerCase() === chain.address.toLowerCase()
                     );
                     const role = dbAgent?.role || "WORKER";
 

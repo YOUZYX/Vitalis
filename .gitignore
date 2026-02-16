@@ -31,4 +31,4 @@ Thumbs.db
 *.log
 
 # Deployment
-deployments.json
+# deployments.json
