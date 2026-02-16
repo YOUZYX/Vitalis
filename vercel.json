@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "/packages/backend/api/index.ts"
+        }
+    ],
+    "ignoreCommand": "git diff --quiet HEAD^ HEAD ./"
+}
