@@ -58,10 +58,10 @@ export function initBlockchain() {
     // ─── Validate private key before ethers touches it ───────────
     const key = process.env.WALLET_PRIVATE_KEY || PRIVATE_KEY;
     if (!key || !key.startsWith("0x") || key.length < 64) {
-        console.error("❌ FATAL: WALLET_PRIVATE_KEY is missing or invalid (must start with 0x)");
+        console.error("❌ WALLET_PRIVATE_KEY is missing or invalid (must start with 0x)");
         console.error("   Current value length:", key ? key.length : 0);
         console.error("   Starts with 0x:", key ? key.startsWith("0x") : false);
-        process.exit(1);
+        throw new Error("WALLET_PRIVATE_KEY is missing or invalid — set it in environment variables");
     }
 
     provider = new JsonRpcProvider(RPC_URL);

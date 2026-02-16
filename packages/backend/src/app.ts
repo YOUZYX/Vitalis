@@ -17,7 +17,23 @@ export async function buildApp() {
     // ─── Plugins ─────────────────────────────────────────────────────────
 
     app.register(cors, {
-        origin: ["http://localhost:3000", "http://localhost:3001", "https://vitalis.vercel.app"],
+        origin: (origin, cb) => {
+            const allowed = [
+                "http://localhost:3000",
+                "http://localhost:3001",
+                "https://vitalis.vercel.app",
+            ];
+            // Allow same-origin (no origin header) and Vercel preview deployments
+            if (
+                !origin ||
+                allowed.includes(origin) ||
+                origin.endsWith(".vercel.app")
+            ) {
+                cb(null, true);
+            } else {
+                cb(null, false);
+            }
+        },
         credentials: true,
     });
 

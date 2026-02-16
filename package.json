@@ -4,6 +4,7 @@
   "private": true,
   "description": "Vitalis — Multi-Agent Autonomous Coordination on Monad",
   "scripts": {
+    "postinstall": "pnpm --filter backend prisma:generate",
     "dev:frontend": "pnpm --filter frontend dev",
     "dev:backend": "pnpm --filter backend dev",
     "dev:agents": "pnpm --filter agents dev",
