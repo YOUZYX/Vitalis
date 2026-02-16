@@ -1,0 +1,19 @@
+{
+  "name": "vitalis",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vitalis — Multi-Agent Autonomous Coordination on Monad",
+  "scripts": {
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:agents": "pnpm --filter agents dev",
+    "build:contracts": "pnpm --filter contracts compile",
+    "test:contracts": "pnpm --filter contracts test",
+    "db:migrate": "pnpm --filter backend prisma:migrate",
+    "db:generate": "pnpm --filter backend prisma:generate",
+    "db:seed": "pnpm --filter backend prisma:seed"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

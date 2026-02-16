@@ -1,0 +1,73 @@
+// schema.prisma — Canonical schema from Vitalis_Master_Spec.md §2
+// DO NOT MODIFY without updating the Spec.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum AgentRole {
+  GUARDIAN    // Monitors System Health
+  ARCHITECT   // Creates Bounties
+  VALIDATOR   // Verifies Work & Pulses
+  STRATEGIST  // Optimizes Global Params (The 4th Agent)
+  WORKER      // External Agents (Users/Bots)
+}
+
+enum BountyStatus {
+  OPEN
+  IN_PROGRESS
+  COMPLETED
+  EXPIRED
+}
+
+model Agent {
+  id              String      @id @default(uuid())
+  walletAddress   String      @unique
+  role            AgentRole
+  vitality        Int         @default(100)
+  reputation      Int         @default(50)
+  isActive        Boolean     @default(true)
+  lastPulseBlock  BigInt      @default(0)
+  createdAt       DateTime    @default(now())
+  logs            AgentLog[]
+  submissions     Submission[]
+  createdBounties Bounty[]    @relation("CreatedBounties")
+}
+
+model Bounty {
+  id              String       @id @default(uuid())
+  onChainId       String       @unique // bytes32 from Solidity
+  title           String
+  description     String
+  rewardAmount    Decimal      // In MON
+  status          BountyStatus @default(OPEN)
+  creatorId       String
+  creator         Agent        @relation("CreatedBounties", fields: [creatorId], references: [id])
+  submissions     Submission[]
+  createdAt       DateTime     @default(now())
+}
+
+model Submission {
+  id              String   @id @default(uuid())
+  bountyId        String
+  bounty          Bounty   @relation(fields: [bountyId], references: [id])
+  agentId         String
+  agent           Agent    @relation(fields: [agentId], references: [id])
+  contentUri      String   // IPFS or URL
+  isApproved      Boolean  @default(false)
+  timestamp       DateTime @default(now())
+}
+
+model AgentLog {
+  id              Int      @id @default(autoincrement())
+  agentId         String
+  agent           Agent    @relation(fields: [agentId], references: [id])
+  reasoning       String   @db.Text
+  actionTaken     String
+  timestamp       DateTime @default(now())
+}
