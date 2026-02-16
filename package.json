@@ -11,7 +11,8 @@
     "test:contracts": "pnpm --filter contracts test",
     "db:migrate": "pnpm --filter backend prisma:migrate",
     "db:generate": "pnpm --filter backend prisma:generate",
-    "db:seed": "pnpm --filter backend prisma:seed"
+    "db:seed": "pnpm --filter backend prisma:seed",
+    "vercel-build": "pnpm --filter backend prisma:generate && pnpm --filter frontend build"
   },
   "engines": {
     "node": ">=18.0.0"

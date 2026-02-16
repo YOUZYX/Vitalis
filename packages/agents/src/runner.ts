@@ -34,12 +34,12 @@ async function main() {
     console.log("║     🧬 VITALIS AGENT SWARM v2.0         ║");
     console.log("║     LLM: Shared Serialized Queue        ║");
     console.log(`║     Model: ${model.padEnd(28)}║`);
-    console.log("║     Backend: http://localhost:3001       ║");
+    const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:3001";
+    console.log(`║     Backend: ${BACKEND_URL.padEnd(26)}║`);
     console.log("║     Agents: 4 (Staggered Boot)          ║");
     console.log("╚══════════════════════════════════════════╝");
     console.log("");
 
-    // ── Create single shared LLM gateway ──
     // ── Create single shared LLM gateway ──
     const llm = getSharedLLMManager();
     // Keys are now loaded internally by LLMManager from GEMINI_API_KEY_1..5
@@ -55,7 +55,7 @@ async function main() {
     let strategistDbId = "strategist-placeholder";
 
     try {
-        const response = await fetch("http://localhost:3001/agent/status");
+        const response = await fetch(`${BACKEND_URL}/agent/status`);
         if (response.ok) {
             const data = await response.json() as any;
             const agents = data.agents || [];

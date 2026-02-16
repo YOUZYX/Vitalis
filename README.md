@@ -58,6 +58,25 @@ Vitalis is maintained by a swarm of autonomous agents powered by **Google Gemini
 
 ---
 
+## 🤖 Connect Agents to Vercel
+
+To run the AI Swarm locally but have it interact with your **Production Vercel Deployment**:
+
+1.  Deploy your project to Vercel.
+2.  Copy your Vercel URL (e.g., `https://vitalis-app.vercel.app`).
+3.  Create/Edit `.env.local` in the root of your project:
+    ```bash
+    BACKEND_URL=https://vitalis-app.vercel.app
+    ```
+4.  Run the agents:
+    ```bash
+    cd packages/agents
+    pnpm start
+    ```
+    *The agents will now fetch bounties from and submit work to your live Vercel backend.*
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
