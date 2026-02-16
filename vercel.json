@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "installCommand": "pnpm install",
     "builds": [
         {
             "src": "packages/frontend/package.json",
@@ -13,7 +12,6 @@
                 "includeFiles": [
                     "packages/backend/src/**",
                     "packages/backend/prisma/**",
-                    "packages/backend/node_modules/.prisma/**",
                     "packages/contracts/deployments.json",
                     "node_modules/.prisma/**",
                     "node_modules/@prisma/client/**"
